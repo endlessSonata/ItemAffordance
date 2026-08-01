@@ -1,6 +1,7 @@
 _G.COMPONENT_ORDER = ".[COMPONENT]"
 
-_G.DATA_UPDATE_DELAY = mods["boblibrary"] ~= nil or mods["quality"] ~= nil or mods["Krastorio2"] ~= nil
+-- i do my best to register affordances as early in the load order as possible
+_G.DATA_UPDATE_DELAY = mods["boblibrary"] ~= nil or mods["quality"] ~= nil or mods["recycler"] ~= nil or mods["Krastorio2"] ~= nil
 _G.DATA_FINAL_DELAY = mods["space-exploration"] ~= nil or mods["5dim_core"] ~= nil or mods["pypostprocessing"] ~= nil or mods["AdvancedBeltsSA"] ~= nil
 
 _G.GLOBAL_UTIL = {
@@ -86,6 +87,26 @@ if mods["pyindustry"] then
   table.insert(item_affordance_logistic_container_types, {prefix = "py-storehouse-", postfix = ""})
   table.insert(item_affordance_logistic_container_types, {prefix = "py-warehouse-", postfix = ""})
   table.insert(item_affordance_logistic_container_types, {prefix = "py-deposit-", postfix = ""})
+end
+
+_G.item_affordance_5d_logistic_container_types = {}
+
+if mods["5dim_storage"] then
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-02"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-03"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-04"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-05"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-06"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-07"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-08"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-09"})
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "5d-", postfix = "-chest-10"})
+
+  for _,v in ipairs(item_affordance_5d_logistic_container_types) do
+      table.insert(item_affordance_logistic_container_types, v)
+  end
+
+  table.insert(item_affordance_5d_logistic_container_types, {prefix = "", postfix = "-chest"})
 end
 
 --belt tiers, only used in prototype stage

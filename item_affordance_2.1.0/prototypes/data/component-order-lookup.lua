@@ -22,6 +22,8 @@ for _, name in ipairs(item_affordance_allowed_item_groups["all-logistic-containe
 
         if key == name.. "-chest" or key == "bob-" .. name.. "-chest-2" or key == "bob-" .. name.. "-chest-3" then
             item_affordance_component_order[key] = "b[storage]-d" .. COMPONENT_ORDER .. item_affordance_logistic_order[name] .. "-[" .. key .. "]"
+        elseif fixes.prefix == "5d-" and nil ~= string.find(fixes.postfix, "-chest") then
+            item_affordance_component_order[key] = "b[storage]-da" .. COMPONENT_ORDER .. item_affordance_logistic_order[name] .. "-[" .. key .. "]"
         elseif fixes.prefix == "storehouse-" then
             item_affordance_component_order[key] = "b[storage]-" .. COMPONENT_ORDER .. item_affordance_logistic_order[name] .. "-a[storehouse]"
         elseif fixes.prefix == "warehouse-" then
@@ -57,7 +59,9 @@ for _, name in ipairs(item_affordance_allowed_item_groups["all-logistic-containe
         or key == "bob-" .. name .. "-chest-3"
         or key == "kr-" .. name .. "-strongbox"
         or key == "kr-" .. name .. "-warehouse" then
-            item_affordance_afforded_order[key] = "b[storage]-d" .. item_affordance_logistic_order[name] .. "-[" .. key .. "]"
+            item_affordance_afforded_order[key] = "b[storage]-da" .. item_affordance_logistic_order[name] .. "-[" .. key .. "]"
+        elseif fixes.prefix == "5d-" and nil ~= string.find(fixes.postfix, "-chest") then
+            item_affordance_afforded_order[key] = "b[storage]-db" .. item_affordance_logistic_order[name] .. "-[" .. key .. "]"
         elseif fixes.prefix == "py-shed-"
         or fixes.prefix == "py-storehouse-"
         or fixes.prefix == "py-warehouse-"
@@ -118,5 +122,13 @@ if mods["boblogistics"] then
                 item_affordance_subgroup_order[GLOBAL_UTIL.hypenFix(string.format(name, prefix, postfix))] = tier.bob_subgroup
             end
         end
+    end
+end
+
+if mods["5dim_storage"] then
+    for _, containerType in ipairs(item_affordance_5d_logistic_container_types) do
+        item_affordance_subgroup_order[containerType.prefix .. settings.startup["all-logistic-container-component-base"].value .. containerType.postfix] = "item-affordance-passive-containers"
+        item_affordance_subgroup_order[containerType.prefix .. settings.startup["passive-logistic-container-component-base"].value .. containerType.postfix] = "item-affordance-passive-containers"
+        item_affordance_subgroup_order[containerType.prefix .. settings.startup["active-logistic-container-component-base"].value .. containerType.postfix] = "item-affordance-active-containers"
     end
 end

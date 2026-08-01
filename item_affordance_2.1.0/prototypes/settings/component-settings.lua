@@ -144,3 +144,7 @@ end
 if mods["bobassembly"] or mods["bobplates"] or mods["bobpower"] then
     data:extend({doAffordanceComponentsOn("bob-machine-components", "i")})
 end
+
+if mods["5dim_logistic"] then
+    data:extend({doAffordanceComponentsOn("5dim-roboport-components", "i")})
+end

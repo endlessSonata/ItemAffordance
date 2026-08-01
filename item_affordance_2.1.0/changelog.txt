@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.1.0
+Date: 2026-08-01
+  Bugfixes:
+    - Tile affordance now works for bot placement. Pipette is still broken for afforded tiles.
+  Modding:
+    - Removed optional dependency for a handful mods not updated for 2.1 at the time of this version's release. The code for their support is still present.
+    - Support for 5Dim's compact roboports and tiered logistics containers
+  Info:
+    - 2.1 Update
+---------------------------------------------------------------------------------------------------
 Version: 2.0.11
 Date: 2026-03-31
   Bugfixes:

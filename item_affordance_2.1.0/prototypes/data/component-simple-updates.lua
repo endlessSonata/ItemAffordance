@@ -44,6 +44,18 @@ return {
                 componentUtil.attachComponentToItem("tree", {entity_name = "tree-0", item_name = "dect-base-tree-0" .. value}, "dect-base-tree-01", 1, false)
             end
         end
+
+        if mods["5dim_logistic"] and settings.startup["5dim-roboport-components"].value then
+            local mini5droboport_tiers = {"10"}
+            for i = 1, 9, 1 do
+                table.insert(mini5droboport_tiers, "0" .. i)
+            end
+            for _, type in ipairs({"5d-roboport-logistic-", "5d-roboport-construction-", "5d-roboport-compact-"}) do
+                for _, tier in ipairs(mini5droboport_tiers) do
+                    componentUtil.attachComponentToItem("roboport", type .. tier, "5d-roboport-charging-" .. tier)
+                end
+            end
+        end
     end,
     data_updates = function()
         if settings.startup["electric-pole-components"].value then

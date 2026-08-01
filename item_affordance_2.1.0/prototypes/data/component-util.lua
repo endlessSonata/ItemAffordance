@@ -1,4 +1,5 @@
 local pipetteOverrides = data.raw["mod-data"]["item_affordance-entity-to-item-list"].data
+local recycle_tech = data.raw["technology"]["recycling"]
 local items = data.raw["item"]
 local railPlanners = data.raw["rail-planner"]
 local modules = data.raw.module
@@ -98,9 +99,20 @@ local function handleItemOrder(item_name, sample_result)
 end
 
 local function recycleRecipe(name, details)
-    if data.raw["recipe"][name .. "-recycling"] then
-        data.raw["recipe"][name .. "-recycling"] = nil
+    -- remove vanilla recycle recipe
+    local recycle_recipe_name = name .. "-recycling"
+    if data.raw["recipe"][recycle_recipe_name] then
+        data.raw["recipe"][recycle_recipe_name] = nil
     end
+    if recycle_tech then
+        for i, effect in pairs(recycle_tech["effects"]) do
+            if (effect["type"] == "unlock-recipe" and effect["recipe"] == recycle_recipe_name) then
+                table.remove(recycle_tech["effects"], i)
+                break
+            end
+        end
+    end
+
     local recall_name = name .. "-recall"
     if data.raw["recipe"][recall_name] then
         data.raw["recipe"][recall_name] = nil
@@ -108,7 +120,7 @@ local function recycleRecipe(name, details)
     local recipe = {
         type = "recipe",
         name = recall_name,
-        category = "adordance-reclaimer",
+        categories = {"adordance-reclaimer"},
         results = {{amount = details.amount, name = details.result, type = "item"}},
         ingredients = {{amount = 1, type = "item", name = details.ingredient}},
         energy_required = 0.002,
@@ -143,7 +155,7 @@ local function fromComponentRecipieStep(parsed_result_name, parsed_recipe_name, 
 
     if recipe then
         recipe.ingredients = {{amount = cost, type = "item", name = component_name}}
-        recipe.category = "crafting"
+        recipe.categories = {"crafting"}
         -- these items are only used for placement, so i don't think it makes sence to have a time cost
         recipe.energy_required = 0.002
         recipe.emissions_multiplier = 0

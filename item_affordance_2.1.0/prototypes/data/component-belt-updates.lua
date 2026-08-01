@@ -14,8 +14,8 @@ local function modifyBelt(type, name, component, cost, amount, subgroup)
         end
 
         local recipe = componentUtil.fromComponentRecipie(name, component, cost, amount)
-        if mods["space-age"] and recipe and recipe["additional_categories"] == nil then
-            recipe["additional_categories"] = {"metallurgy"}
+        if mods["space-age"] and recipe then
+            table.insert(recipe.categories , "metallurgy")
         end
 
         if subgroup and subgroups[subgroup] then
