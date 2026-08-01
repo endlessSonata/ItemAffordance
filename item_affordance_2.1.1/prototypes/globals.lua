@@ -2,7 +2,7 @@ _G.COMPONENT_ORDER = ".[COMPONENT]"
 
 -- i do my best to register affordances as early in the load order as possible
 _G.DATA_UPDATE_DELAY = mods["boblibrary"] ~= nil or mods["quality"] ~= nil or mods["recycler"] ~= nil or mods["Krastorio2"] ~= nil
-_G.DATA_FINAL_DELAY = mods["space-exploration"] ~= nil or mods["5dim_core"] ~= nil or mods["pypostprocessing"] ~= nil or mods["AdvancedBeltsSA"] ~= nil
+_G.DATA_FINAL_DELAY = mods["space-exploration"] ~= nil or mods["5dim_core"] ~= nil or mods["pypostprocessing"] ~= nil or mods["AdvancedBeltsSA"] ~= nil or (mods["recycler"] ~= nil and mods["Krastorio2"] ~= nil)
 
 _G.GLOBAL_UTIL = {
     hypenFix = function(str) return string.gsub(string.gsub(string.gsub(str, "%-%-", "-"), "^%-", ""), "%-$", "") end

@@ -108,7 +108,6 @@ local function recycleRecipe(name, details)
         for i, effect in pairs(recycle_tech["effects"]) do
             if (effect["type"] == "unlock-recipe" and effect["recipe"] == recycle_recipe_name) then
                 table.remove(recycle_tech["effects"], i)
-                break
             end
         end
     end
